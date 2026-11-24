@@ -1,0 +1,7 @@
+ID,name,holidayDate,country,region,holidayType,isWorkingDay,createdAt,createdBy,modifiedAt,modifiedBy
+e73bd74c-0993-51d5-a92f-2767b96c4712,Republic Day,2026-01-26,IND,,Public,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
+c0798d91-2042-5b11-8d3e-ff82b4778849,Holi,2026-03-14,IND,,Public,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
+9b9cbe4d-2e1b-5ae7-bc20-64f228efa0ab,Independence Day,2026-08-15,IND,,Public,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
+69206e10-5c21-54ad-b98b-a072137f1682,Gandhi Jayanti,2026-10-02,IND,,Public,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
+b0477a04-2074-5edf-860d-f82bb6f94fca,Christmas,2026-12-25,IND,,Public,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
+7cd7edf5-29d4-5b8b-b2aa-25c4ae8f6637,Company Foundation Day,2026-07-01,IND,,Company,false,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system

@@ -1,0 +1,51 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+    controllerName="wfms.ui.controller.OvertimeDetail" displayBlock="true">
+    <Page title="Overtime Detail" showNavButton="true" navButtonPress="onNavBack">
+        <VBox class="sapUiSmallMargin">
+            <ObjectHeader title="{overtimeType} Overtime" number="{path:'estimatedAmount', formatter:'.formatters.formatAmount'}"
+                intro="{employee/fullName}">
+                <attributes>
+                    <ObjectAttribute text="Work Date: {path:'workDate', type:'sap.ui.model.odata.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                    <ObjectAttribute text="Duration: {overtimeMinutes} min" />
+                    <ObjectAttribute text="Multiplier: {multiplier}x" />
+                </attributes>
+                <firstStatus>
+                    <ObjectStatus text="{status}" state="{path:'status', formatter:'.formatters.statusValueState'}" />
+                </firstStatus>
+            </ObjectHeader>
+
+            <f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanL="4" columnsL="2" class="sapUiSmallMargin">
+                <f:content>
+                    <Title text="Overtime Details" level="H3" />
+                    <Label text="Employee" /><Text text="{employee/fullName} ({employee/employeeNumber})" />
+                    <Label text="Department" /><Text text="{employee/department/name}" />
+                    <Label text="Regular Shift" /><Text text="{regularShiftStart} - {regularShiftEnd} ({regularShiftMinutes} min)" />
+                    <Label text="Overtime Window" /><Text text="{overtimeStart} - {overtimeEnd}" />
+                    <Label text="Overtime Type" /><Text text="{overtimeType}" />
+                    <Label text="Duration (min)" /><Text text="{overtimeMinutes}" />
+                    <Label text="Base Hourly Rate" /><Text text="{path:'baseHourlyRate', formatter:'.formatters.formatAmount'}" />
+                    <Label text="Multiplier" /><Text text="{multiplier}x" />
+                    <Label text="Estimated Amount" /><Text text="{path:'estimatedAmount', formatter:'.formatters.formatAmount'}" />
+                    <Label text="Comp-Off Election" /><Text text="{compOffElection}" />
+                    <Label text="Comp-Off Credits Earned" /><Text text="{compOffCreditsEarned}" />
+                    <Label text="Reason" /><Text text="{reason}" />
+                    <Label text="Requestor Comments" /><Text text="{requestorComments}" />
+                    <Label text="Created At" /><Text text="{path:'createdAt', type:'sap.ui.model.odata.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                    <Label text="Approver" /><Text text="{approver/fullName}" />
+                    <Label text="Approved At" /><Text text="{path:'approvedAt', type:'sap.ui.model.odata.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                    <Label text="Approver Comments" /><Text text="{approverComments}" />
+                    <Label text="Overlap Warning" /><Text text="{overlapWarning}" />
+                    <Label text="Compliance Warning" /><Text text="{complianceWarning}" />
+                </f:content>
+            </f:SimpleForm>
+
+            <Toolbar class="sapUiMediumMarginTop">
+                <Button text="Submit" type="Emphasized" press="onSubmit" enabled="{= ${status} === 'Draft' || ${status} === 'SentBack' }" />
+                <Button text="Approve" type="Accept" press="onApprove" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="Reject" type="Reject" press="onReject" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="Send Back" press="onSendBack" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="Cancel" press="onCancel" enabled="{= ${status} === 'Draft' || ${status} === 'PendingManager' || ${status} === 'SentBack' }" />
+            </Toolbar>
+        </VBox>
+    </Page>
+</mvc:View>
