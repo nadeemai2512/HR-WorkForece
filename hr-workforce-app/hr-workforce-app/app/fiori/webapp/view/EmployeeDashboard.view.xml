@@ -1,0 +1,158 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.EmployeeDashboard"
+  height="100%">
+  <Page id="employeeDashboardPage"
+    showHeader="true"
+    title="{i18n>titleEmployeeDashboard}"
+    showNavButton="false">
+    <headerContent>
+      <Button icon="sap-icon://bell" tooltip="{i18n>complianceAlerts}"
+        type="Emphasized" press="onComplianceAlerts"/>
+    </headerContent>
+
+    <ScrollContainer height="100%" width="100%" vertical="true">
+      <l:Grid class="dashboardGrid" defaultSpan="L3 M6 S12">
+
+        <GenericTile class="kpiTile" header="{i18n>tileAvailableEL}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/availableEL}" icon="sap-icon://calendar"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileAvailableSL}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/availableSL}" icon="sap-icon://stethoscope"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileAvailableCL}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/availableCL}" icon="sap-icon://appointment-2"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileAvailableComp}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/availableComp}" icon="sap-icon://time-entry-request"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tilePendingLeave}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/><core:CustomData key="filter" value="pending"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/pendingLeave}" icon="sap-icon://pending" state="Warning"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileApprovedLeave}" press="onTilePress">
+          <customData><core:CustomData key="route" value="leaveList"/><core:CustomData key="filter" value="approved"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/approvedLeave}" icon="sap-icon://accept" state="Good"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileWeeklyHours}" press="onTilePress">
+          <customData><core:CustomData key="route" value="myShifts"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/weeklyWorkingHours}" scale="h" icon="sap-icon://horizontal-bullet-chart"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileRemainingHours}" press="onTilePress">
+          <customData><core:CustomData key="route" value="myShifts"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/remainingWeeklyHours}" scale="h" icon="sap-icon://hourglass"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tilePendingOT}" press="onTilePress">
+          <customData><core:CustomData key="route" value="overtimeList"/><core:CustomData key="filter" value="pending"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/pendingOvertime}" icon="sap-icon://pending" state="Warning"/></TileContent></tileContent>
+        </GenericTile>
+
+        <GenericTile class="kpiTile" header="{i18n>tileApprovedOT}" press="onTilePress">
+          <customData><core:CustomData key="route" value="overtimeList"/><core:CustomData key="filter" value="approved"/></customData>
+          <tileContent><TileContent><NumericContent value="{appView>/employeeDashboard/approvedOvertimeHours}" scale="h" icon="sap-icon://accept" state="Good"/></TileContent></tileContent>
+        </GenericTile>
+      </l:Grid>
+
+      <!-- Quick Actions -->
+      <Panel headerText="{i18n>quickActions}" class="sapUiResponsiveMargin">
+        <l:Grid defaultSpan="L2 M4 S6">
+          <Button type="Emphasized" text="{i18n>btnApplyLeave}" icon="sap-icon://calendar" press="onApplyLeave"/>
+          <Button type="Emphasized" text="{i18n>btnSubmitOvertime}" icon="sap-icon://overtime" press="onSubmitOvertime"/>
+          <Button type="Emphasized" text="{i18n>btnRequestSwap}" icon="sap-icon://swap" press="onGoShifts"/>
+          <Button type="Transparent" text="{i18n>btnViewSchedule}" icon="sap-icon://calendar-full" press="onGoShifts"/>
+          <Button type="Transparent" text="{i18n>btnViewHistory}" icon="sap-icon://history" press="onGoLeaveList"/>
+        </l:Grid>
+      </Panel>
+
+      <!-- My Recent Leave Requests -->
+      <Panel headerText="{i18n>myRecentLeave}" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <Table id="recentLeaveTable" items="{/LeaveRequests}" growing="true" growingThreshold="5"
+          noDataText="{i18n>msgNoData}">
+          <columns>
+            <Column><Text text="{i18n>colLeaveType}"/></Column>
+            <Column><Text text="{i18n>colStartDate}"/></Column>
+            <Column><Text text="{i18n>colEndDate}"/></Column>
+            <Column><Text text="{i18n>colDays}"/></Column>
+            <Column><Text text="{i18n>colStatus}"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem type="Navigation" press="onLeaveItemPress">
+              <cells>
+                <Text text="{path:'leaveType_code', formatter:'.formatter.leaveTypeText'}"/>
+                <Text text="{path:'startDate', type:'sap.ui.model.odata.type.Date'}"/>
+                <Text text="{path:'endDate', type:'sap.ui.model.odata.type.Date'}"/>
+                <Text text="{path:'days', type:'sap.ui.model.odata.type.Decimal', formatOptions:{maxFractionDigits:1}}"/>
+                <ObjectStatus text="{path:'status', formatter:'.formatter.statusText'}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Panel>
+
+      <!-- My Upcoming Shifts -->
+      <Panel headerText="{i18n>myUpcomingShifts}" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <Table id="upcomingShiftsTable" items="{/ShiftAssignments}" growing="true" growingThreshold="5" noDataText="{i18n>msgNoData}">
+          <columns>
+            <Column><Text text="{i18n>colDate}"/></Column>
+            <Column><Text text="{i18n>colTemplate}"/></Column>
+            <Column><Text text="{i18n>colTime}"/></Column>
+            <Column><Text text="{i18n>colStatus}"/></Column>
+            <Column><Text text="{i18n>colAction}"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{path:'shiftDate', type:'sap.ui.model.odata.type.Date'}"/>
+                <Text text="{template_code}"/>
+                <Text text="{startTime} - {endTime}"/>
+                <ObjectStatus text="{status}" state="None"/>
+                <Button icon="sap-icon://swap" type="Transparent" press="onSwapShift" tooltip="{i18n>btnRequestSwap}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Panel>
+
+      <!-- My Overtime Summary -->
+      <Panel headerText="{i18n>myOvertimeSummary}" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <Table id="overtimeSummaryTable" items="{/OvertimeRequests}" growing="true" growingThreshold="5" noDataText="{i18n>msgNoData}">
+          <columns>
+            <Column><Text text="{i18n>colWorkDate}"/></Column>
+            <Column><Text text="{i18n>colOtHours}"/></Column>
+            <Column><Text text="{i18n>colOtType}"/></Column>
+            <Column><Text text="{i18n>colAmount}"/></Column>
+            <Column><Text text="{i18n>colStatus}"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{path:'workDate', type:'sap.ui.model.odata.type.Date'}"/>
+                <Text text="{path:'otHours', type:'sap.ui.model.odata.type.Decimal'}"/>
+                <Text text="{path:'otType', formatter:'.formatter.otTypeText'}"/>
+                <Text text="{path:'estimatedAmount', type:'sap.ui.model.odata.type.Decimal', formatOptions:{showMeasure:false}}"/>
+                <ObjectStatus text="{path:'status', formatter:'.formatter.statusText'}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Panel>
+
+    </ScrollContainer>
+  </Page>
+</mvc:View>

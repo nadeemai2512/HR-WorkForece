@@ -1,0 +1,5 @@
+code;name;description;allowNegativeBalance;carryForwardEnabled;carryForwardMaxDays;exemptFromBlackout;exemptFromAdvanceNotice;medicalCertThresholdDays;active
+EL;Earned Leave;Annual paid leave;false;true;15;false;false;0;true
+SL;Sick Leave;Medical leave;true;false;0;true;true;2;true
+CL;Casual Leave;Short personal leave;false;false;0;false;false;0;true
+COMP;Compensatory Off;Earned from overtime;true;false;0;true;true;0;true

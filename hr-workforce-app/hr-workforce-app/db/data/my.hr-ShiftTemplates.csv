@@ -1,0 +1,4 @@
+code;name;startTime;endTime;crossesMidnight;color;active
+MORNING;Morning Shift;06:00;14:30;false;#4CAF50;true
+GENERAL;General Shift;09:00;18:00;false;#2196F3;true
+NIGHT;Night Shift;22:00;06:30;true;#9C27B0;true

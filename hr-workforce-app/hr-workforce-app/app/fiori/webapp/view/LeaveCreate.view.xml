@@ -1,0 +1,49 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.LeaveCreate"
+  height="100%">
+  <Page title="{i18n>titleLeaveCreate}" showNavButton="true" navButtonPress="onNavBack">
+    <content>
+      <f:SimpleForm id="leaveForm" editable="true" layout="ResponsiveGridLayout"
+        labelSpanL="3" labelSpanM="4" emptySpanL="4" emptySpanM="0"
+        columnsL="1" columnsM="1" class="sapUiResponsiveMargin">
+        <f:content>
+          <Label text="{i18n>colEmployee}"/>
+          <Text text="{appView>/currentUserNo}"/>
+          <Label text="{i18n>colLeaveType}" required="true"/>
+          <Select id="leaveTypeSelect" selectedKey="EL" items="{/LeaveTypes}">
+            <items>
+              <core:Item key="{code}" text="{name}"/>
+            </items>
+          </Select>
+          <Label text="{i18n>colStartDate}" required="true"/>
+          <DatePicker id="startDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" change="onPreview"/>
+          <Label text="{i18n>colEndDate}" required="true"/>
+          <DatePicker id="endDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" change="onPreview"/>
+          <Label text="{i18n>colDays}"/>
+          <Text id="previewDays" text="0"/>
+          <Label text="Validation"/>
+          <Text id="previewMessages" text="" width="100%"/>
+          <Label text="Medical Certificate"/>
+          <Text id="medicalCertHint" text="Not required"/>
+          <Label text="Supporting Documents"/>
+          <UploadCollection id="attachmentUpload" maximumFilenameLength="80" multiple="true"
+            instantUpload="false" showSeparators="All" mode="None"/>
+          <Label text="{i18n>colReason}" required="true"/>
+          <TextArea id="reason" growing="true" growingMaxLines="4" width="100%"/>
+        </f:content>
+      </f:SimpleForm>
+    </content>
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer/>
+        <Button text="{i18n>btnSubmit}" type="Emphasized" press="onSubmit"/>
+        <Button text="{i18n>btnCancel}" press="onNavBack"/>
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

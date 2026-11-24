@@ -1,0 +1,39 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.OvertimeCreate"
+  height="100%">
+  <Page title="{i18n>titleOvertimeCreate}" showNavButton="true" navButtonPress="onNavBack">
+    <content>
+      <f:SimpleForm id="otForm" editable="true" layout="ResponsiveGridLayout" class="sapUiResponsiveMargin"
+        labelSpanL="3" labelSpanM="4" columnsL="1">
+        <f:content>
+          <Label text="{i18n>colEmployee}"/><Text text="{appView>/currentUserNo}"/>
+          <Label text="{i18n>colWorkDate}" required="true"/>
+          <DatePicker id="workDate" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+          <Label text="{i18n>colRegularHours}"/>
+          <Input id="regularShiftHours" type="Number" value="0" description="hours already worked that day"/>
+          <Label text="{i18n>colOtStart}" required="true"/>
+          <TimePicker id="otStart" valueFormat="HH:mm" displayFormat="HH:mm"/>
+          <Label text="{i18n>colOtEnd}" required="true"/>
+          <TimePicker id="otEnd" valueFormat="HH:mm" displayFormat="HH:mm"/>
+          <Label text="Convert to Comp-Off"/>
+          <CheckBox id="convertToCompOff" selected="false"/>
+          <Label text="{i18n>colReason}" required="true"/>
+          <TextArea id="reason" growing="true" width="100%"/>
+        </f:content>
+      </f:SimpleForm>
+      <MessageStrip id="complianceStrip" text="" type="Information" showIcon="true" class="sapUiResponsiveMargin" visible="false"/>
+    </content>
+    <footer>
+      <Toolbar>
+        <Button text="Recalculate" press="onRecalc" visible="false"/>
+        <ToolbarSpacer/>
+        <Button text="{i18n>btnSubmit}" type="Emphasized" press="onSubmit"/>
+        <Button text="{i18n>btnCancel}" press="onNavBack"/>
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

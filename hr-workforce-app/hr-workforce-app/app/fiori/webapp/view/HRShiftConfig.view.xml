@@ -1,0 +1,63 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.HRShiftConfig"
+  height="100%">
+  <Page title="{i18n>titleHRShiftConfig}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://add" text="Add Shift Template" type="Emphasized" press="onAddTemplate"/>
+    </headerContent>
+
+    <Panel headerText="Shift Templates" class="sapUiResponsiveMargin">
+      <Table id="templatesTable" items="{/ShiftTemplates}" mode="None" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="Code"/></Column>
+          <Column><Text text="Name"/></Column>
+          <Column><Text text="Start"/></Column>
+          <Column><Text text="End"/></Column>
+          <Column><Text text="Crosses Midnight"/></Column>
+          <Column><Text text="Color"/></Column>
+          <Column><Text text="Active"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{code}"/>
+              <Text text="{name}"/>
+              <Text text="{startTime}"/>
+              <Text text="{endTime}"/>
+              <Text text="{path:'crossesMidnight', formatter:'.formatter.boolText'}"/>
+              <Text text="{color}"/>
+              <ObjectStatus text="{path:'active', formatter:'.formatter.boolText'}" state="{= ${active} ? 'Success' : 'Error' }"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+
+    <Panel headerText="Shift Assignments (read-only overview)" class="sapUiResponsiveMargin">
+      <Table id="assignmentsTable" items="{/ShiftAssignments}" mode="None" growing="true" growingThreshold="20" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="{i18n>colEmployee}"/></Column>
+          <Column><Text text="{i18n>colDate}"/></Column>
+          <Column><Text text="{i18n>colTemplate}"/></Column>
+          <Column><Text text="{i18n>colTime}"/></Column>
+          <Column><Text text="{i18n>colStatus}"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{employeeNo}"/>
+              <Text text="{path:'shiftDate', type:'sap.ui.model.odata.type.Date'}"/>
+              <Text text="{template_code}"/>
+              <Text text="{startTime} - {endTime}"/>
+              <ObjectStatus text="{status}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+  </Page>
+</mvc:View>

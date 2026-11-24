@@ -1,0 +1,49 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.Reports"
+  height="100%">
+  <Page title="{i18n>titleReports}" showNavButton="true" navButtonPress="onNavBack">
+    <content>
+      <Panel headerText="Export Reports (payroll-ready & compliance)" class="sapUiResponsiveMargin">
+        <l:Grid defaultSpan="L3 M6 S12">
+          <Button text="Monthly Overtime Summary" icon="sap-icon://excel-attachment" press="onExportOvertime" type="Emphasized"/>
+          <Button text="Leave Utilization" icon="sap-icon://excel-attachment" press="onExportLeaveUtil" type="Emphasized"/>
+          <Button text="Unpaid Leave Summary" icon="sap-icon://excel-attachment" press="onExportUnpaidLeave" type="Transparent"/>
+          <Button text="Department Attendance" icon="sap-icon://excel-attachment" press="onExportAttendance" type="Transparent"/>
+          <Button text="Payroll-Ready Overtime" icon="sap-icon://excel-attachment" press="onExportPayroll" type="Emphasized"/>
+          <Button text="Compliance Alerts" icon="sap-icon://excel-attachment" press="onExportCompliance" type="Transparent"/>
+        </l:Grid>
+        <MessageStrip text="Estimated overtime amounts are clearly distinguished from approved payroll amounts in the payroll export. Payroll export is access-controlled (HR_Admin only)." type="Information" showIcon="true" class="sapUiSmallMarginTop"/>
+      </Panel>
+
+      <Panel headerText="{i18n>complianceAlerts}" class="sapUiResponsiveMargin" expandable="true" expanded="true">
+        <Table id="complianceTable" items="{/EmployeeWorkHours}" growing="true" growingThreshold="50" noDataText="{i18n>msgNoData}">
+          <columns>
+            <Column><Text text="{i18n>colEmployee}"/></Column>
+            <Column><Text text="Week"/></Column>
+            <Column><Text text="Quarter"/></Column>
+            <Column><Text text="Regular (min)"/></Column>
+            <Column><Text text="OT (min)"/></Column>
+            <Column><Text text="Total Hours"/></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{employee_ID}"/>
+                <Text text="{weekKey}"/>
+                <Text text="{quarterKey}"/>
+                <Text text="{regularMinutes}"/>
+                <Text text="{otMinutes}"/>
+                <Text text="{path:'totalHours', type:'sap.ui.model.odata.type.Decimal'}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

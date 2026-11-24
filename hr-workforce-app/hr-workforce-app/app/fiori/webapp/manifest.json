@@ -1,0 +1,119 @@
+{
+  "_version": "1.0.0",
+  "sap.app": {
+    "id": "hr.fiori",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": { "version": "1.0.0" },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/hr/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": { "icon": "" },
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.118.0",
+      "libs": {
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {},
+        "sap.ui.table": {},
+        "sap.ui.unified": {}
+      }
+    },
+    "contentDensities": { "compact": true, "cozy": true },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": { "bundleName": "hr.fiori.i18n.i18n" }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupProperties": { "defaultUpdateGroup": "v4" }
+        }
+      },
+      "appView": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [{ "uri": "css/style.css" }]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "hr.fiori.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "clearControlAggregation": false,
+        "async": true
+      },
+      "routes": [
+        { "name": "employeeDashboard", "pattern": "", "target": "employeeDashboard" },
+        { "name": "leaveList",         "pattern": "leave",         "target": "leaveList" },
+        { "name": "leaveCreate",       "pattern": "leave/create",  "target": "leaveCreate" },
+        { "name": "leaveDetail",       "pattern": "leave/{objectId}", "target": "leaveDetail" },
+        { "name": "overtimeList",      "pattern": "overtime",      "target": "overtimeList" },
+        { "name": "overtimeCreate",    "pattern": "overtime/create", "target": "overtimeCreate" },
+        { "name": "myShifts",          "pattern": "shifts",        "target": "myShifts" },
+        { "name": "shiftSwapCreate",   "pattern": "swap/create/{assignmentId}", "target": "shiftSwapCreate" },
+        { "name": "managerDashboard",  "pattern": "manager",       "target": "managerDashboard" },
+        { "name": "teamPlanning",      "pattern": "planning",      "target": "teamPlanning" },
+        { "name": "approvals",         "pattern": "approvals",     "target": "approvals" },
+        { "name": "hrEmployees",       "pattern": "hr/employees",  "target": "hrEmployees" },
+        { "name": "hrLeavePolicy",     "pattern": "hr/leave-policy", "target": "hrLeavePolicy" },
+        { "name": "hrShiftConfig",     "pattern": "hr/shifts",     "target": "hrShiftConfig" },
+        { "name": "hrCompliance",      "pattern": "hr/compliance", "target": "hrCompliance" },
+        { "name": "reports",           "pattern": "reports",       "target": "reports" },
+        { "name": "auditLogs",         "pattern": "audit",         "target": "auditLogs" }
+      ],
+      "targets": {
+        "employeeDashboard": { "viewName": "EmployeeDashboard", "viewLevel": 1, "title": "{i18n>titleEmployeeDashboard}" },
+        "leaveList":         { "viewName": "LeaveList",         "viewLevel": 2, "title": "{i18n>titleLeaveList}" },
+        "leaveCreate":       { "viewName": "LeaveCreate",       "viewLevel": 3, "title": "{i18n>titleLeaveCreate}" },
+        "leaveDetail":       { "viewName": "LeaveDetail",       "viewLevel": 3, "title": "{i18n>titleLeaveDetail}" },
+        "overtimeList":      { "viewName": "OvertimeList",      "viewLevel": 2, "title": "{i18n>titleOvertimeList}" },
+        "overtimeCreate":    { "viewName": "OvertimeCreate",    "viewLevel": 3, "title": "{i18n>titleOvertimeCreate}" },
+        "myShifts":          { "viewName": "MyShifts",          "viewLevel": 2, "title": "{i18n>titleMyShifts}" },
+        "shiftSwapCreate":   { "viewName": "ShiftSwapCreate",   "viewLevel": 3, "title": "{i18n>titleShiftSwap}" },
+        "managerDashboard":  { "viewName": "ManagerDashboard",  "viewLevel": 1, "title": "{i18n>titleManagerDashboard}" },
+        "teamPlanning":      { "viewName": "TeamPlanningCalendar", "viewLevel": 2, "title": "{i18n>titleTeamPlanning}" },
+        "approvals":         { "viewName": "Approvals",         "viewLevel": 2, "title": "{i18n>titleApprovals}" },
+        "hrEmployees":       { "viewName": "HREmployees",       "viewLevel": 2, "title": "{i18n>titleHREmployees}" },
+        "hrLeavePolicy":     { "viewName": "HRLeavePolicy",     "viewLevel": 2, "title": "{i18n>titleHRLeavePolicy}" },
+        "hrShiftConfig":     { "viewName": "HRShiftConfig",     "viewLevel": 2, "title": "{i18n>titleHRShiftConfig}" },
+        "hrCompliance":      { "viewName": "HRCompliance",      "viewLevel": 2, "title": "{i18n>titleHRCompliance}" },
+        "reports":           { "viewName": "Reports",           "viewLevel": 2, "title": "{i18n>titleReports}" },
+        "auditLogs":         { "viewName": "AuditLogs",         "viewLevel": 2, "title": "{i18n>titleAuditLogs}" }
+      }
+    },
+    "rootView": { "viewName": "hr.fiori.view.App", "type": "XML", "async": true, "id": "app" }
+  },
+  "sap.fiori": {
+    "registration": {
+      "id": "hr-workforce-app",
+      "title": "{{appTitle}}",
+      "subTitle": "{{appSubTitle}}"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.HREmployees"
+  height="100%">
+  <Page title="{i18n>titleHREmployees}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://export" text="{i18n>btnExport}" press="onExport" type="Transparent"/>
+      <Button icon="sap-icon://add" text="Create Employee" type="Emphasized" press="onCreate"/>
+    </headerContent>
+    <subHeader>
+      <Toolbar>
+        <Label text="{i18n>filterDepartment}"/>
+        <Select id="deptFilter" selectedKey="ALL" change="onFilterChange" items="{/Departments}">
+          <core:Item key="ALL" text="All"/>
+          <core:Item key="{code}" text="{name}"/>
+        </Select>
+        <Label text="{i18n>filterStatus}"/>
+        <Select id="statusFilter" selectedKey="ALL" change="onFilterChange">
+          <core:Item key="ALL" text="All"/>
+          <core:Item key="ACTIVE" text="Active"/>
+          <core:Item key="INACTIVE" text="Inactive"/>
+        </Select>
+        <ToolbarSpacer/>
+        <SearchField id="search" width="250px" liveChange="onFilterChange"/>
+      </Toolbar>
+    </subHeader>
+
+    <Table id="empTable" items="{/Employees}" growing="true" growingThreshold="25" noDataText="{i18n>msgNoData}">
+      <columns>
+        <Column><Text text="{i18n>colEmployee}"/></Column>
+        <Column><Text text="{i18n>colDepartment}"/></Column>
+        <Column><Text text="Job Title"/></Column>
+        <Column><Text text="Role"/></Column>
+        <Column><Text text="Manager"/></Column>
+        <Column><Text text="{i18n>colStatus}"/></Column>
+        <Column><Text text="{i18n>colAction}"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem>
+          <cells>
+            <Text text="{fullName} ({employeeNo})"/>
+            <Text text="{department_code}"/>
+            <Text text="{jobTitle}"/>
+            <Text text="{roleCategory}"/>
+            <Text text="{manager_ID}"/>
+            <ObjectStatus text="{status}" state="{= ${status} === 'ACTIVE' ? 'Success' : 'Error' }"/>
+            <HBox>
+              <Button icon="sap-icon://edit" type="Transparent" tooltip="{i18n>btnEdit}" press="onEdit"/>
+              <Button icon="sap-icon://{= ${status} === 'ACTIVE' ? 'decline' : 'activate' }" type="Transparent"
+                tooltip="{= ${status} === 'ACTIVE' ? 'Deactivate' : 'Activate' }" press="onToggleStatus"/>
+            </HBox>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </Page>
+</mvc:View>

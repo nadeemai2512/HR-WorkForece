@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.ui.layout.form">
+  <Dialog id="employeeDialog" draggable="true" resizable="true">
+    <content>
+      <f:SimpleForm editable="true" layout="ResponsiveGridLayout" class="sapUiResponsiveMargin"
+        labelSpanL="4" labelSpanM="4" columnsL="1">
+        <f:content>
+          <Label text="Employee No" required="true"/>
+          <Input value="{empForm>/employeeNo}" enabled="{= !${empForm>/employeeNo} ? true : false }"/>
+          <Label text="First Name" required="true"/>
+          <Input value="{empForm>/firstName}"/>
+          <Label text="Last Name" required="true"/>
+          <Input value="{empForm>/lastName}"/>
+          <Label text="Email" required="true"/>
+          <Input value="{empForm>/email}" type="Email"/>
+          <Label text="Department"/>
+          <Select selectedKey="{empForm>/department_code}" items="{/Departments}">
+            <core:Item key="{code}" text="{name}"/>
+          </Select>
+          <Label text="Manager (Employee No)"/>
+          <Input value="{empForm>/manager_ID}"/>
+          <Label text="Job Title"/>
+          <Input value="{empForm>/jobTitle}"/>
+          <Label text="Role"/>
+          <Select selectedKey="{empForm>/roleCategory}">
+            <core:Item key="EMPLOYEE" text="Employee"/>
+            <core:Item key="MANAGER" text="Manager"/>
+            <core:Item key="HR_ADMIN" text="HR Admin"/>
+          </Select>
+          <Label text="Jurisdiction"/>
+          <Input value="{empForm>/jurisdiction}"/>
+          <Label text="Base Hourly Rate"/>
+          <Input value="{empForm>/baseHourlyRate}" type="Number"/>
+          <Label text="Hire Date"/>
+          <DatePicker value="{empForm>/hireDate}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"/>
+          <Label text="Status"/>
+          <Select selectedKey="{empForm>/status}">
+            <core:Item key="ACTIVE" text="Active"/>
+            <core:Item key="INACTIVE" text="Inactive"/>
+          </Select>
+        </f:content>
+      </f:SimpleForm>
+    </content>
+    <buttons>
+      <Button text="{i18n>btnSave}" type="Emphasized" press="onSaveEmployee"/>
+      <Button text="{i18n>btnCancel}" press="onCancelEmployee"/>
+    </buttons>
+  </Dialog>
+</core:FragmentDefinition>

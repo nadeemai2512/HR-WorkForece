@@ -1,0 +1,78 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:unified="sap.ui.unified"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.MyShifts"
+  height="100%">
+  <Page title="{i18n>titleMyShifts}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://swap" text="{i18n>btnRequestSwap}" press="onSwapSelected" enabled="false" id="swapBtn"/>
+    </headerContent>
+    <subHeader>
+      <Toolbar>
+        <Label text="View:"/>
+        <Select id="viewRange" selectedKey="W" change="onRangeChange">
+          <items>
+            <core:Item xmlns:core="sap.ui.core" key="D" text="Day"/>
+            <core:Item xmlns:core="sap.ui.core" key="W" text="Week"/>
+            <core:Item xmlns:core="sap.ui.core" key="M" text="Month"/>
+          </items>
+        </Select>
+        <ToolbarSpacer/>
+        <Button icon="sap-icon://refresh" press="onRefresh" type="Transparent"/>
+      </Toolbar>
+    </subHeader>
+
+    <!-- Employee schedule as a single-resource PlanningCalendar -->
+    <VBox class="sapUiResponsiveMargin">
+      <PlanningCalendar id="planningCal"
+        rows="{path:'/Employees'}"
+        showEmptyIntervalHeaders="false"
+        appointmentResize="false"
+        appointmentSelect="onAppointmentSelect"
+        viewKey="W">
+        <rows>
+          <PlanningCalendarRow
+            title="{fullName}"
+            text="{employeeNo}"
+            key="{employeeNo}"
+            appointments="{path:'shifts'}"
+            appointmentsVisualization="Filled">
+            <appointments>
+              <unified:PlanningCalendarAppointment
+                startDate="{parts:[{path:'shiftDate'},{path:'startTime'}], formatter:'.formatter.shiftStart}"
+                endDate="{parts:[{path:'shiftDate'},{path:'endTime'},{path:'crossesMidnight'}], formatter:'.formatter.shiftEnd}"
+                title="{path:'template_code'}"
+                text="{startTime}-{endTime}"
+                type="Type_06"/>
+            </appointments>
+            <intervalHeaders/>
+          </PlanningCalendarRow>
+        </rows>
+      </PlanningCalendar>
+    </VBox>
+
+    <Panel headerText="Shift List" class="sapUiResponsiveMargin">
+      <Table id="shiftTable" items="{/ShiftAssignments}" mode="SingleSelectLeft"
+        selectionChange="onShiftSelect" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="{i18n>colDate}"/></Column>
+          <Column><Text text="{i18n>colTemplate}"/></Column>
+          <Column><Text text="{i18n>colTime}"/></Column>
+          <Column><Text text="{i18n>colStatus}"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{path:'shiftDate', type:'sap.ui.model.odata.type.Date'}"/>
+              <Text text="{template_code}"/>
+              <Text text="{startTime} - {endTime}"/>
+              <ObjectStatus text="{status}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+  </Page>
+</mvc:View>

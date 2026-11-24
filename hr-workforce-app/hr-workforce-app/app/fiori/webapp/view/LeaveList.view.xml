@@ -1,0 +1,60 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.LeaveList"
+  height="100%">
+  <Page id="leaveListPage" title="{i18n>titleLeaveList}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://add" type="Emphasized" text="{i18n>btnApplyLeave}" press="onApplyLeave"/>
+    </headerContent>
+
+    <subHeader>
+      <Toolbar>
+        <Select id="statusFilter" selectedKey="ALL" change="onFilterChange" width="200px">
+          <items>
+            <core:Item xmlns:core="sap.ui.core" key="ALL" text="All Status"/>
+            <core:Item xmlns:core="sap.ui.core" key="DRAFT" text="Draft"/>
+            <core:Item xmlns:core="sap.ui.core" key="PENDING_MANAGER" text="Pending Approval"/>
+            <core:Item xmlns:core="sap.ui.core" key="APPROVED" text="Approved"/>
+            <core:Item xmlns:core="sap.ui.core" key="REJECTED" text="Rejected"/>
+            <core:Item xmlns:core="sap.ui.core" key="CANCELLED" text="Cancelled"/>
+          </items>
+        </Select>
+        <Select id="typeFilter" selectedKey="ALL" change="onFilterChange" width="200px"
+          items="{/LeaveTypes}">
+          <core:Item xmlns:core="sap.ui.core" key="ALL" text="All Leave Types"/>
+          <core:Item xmlns:core="sap.ui.core" key="{code}" text="{name}"/>
+        </Select>
+        <ToolbarSpacer/>
+        <SearchField id="searchField" width="300px" liveChange="onSearch"/>
+      </Toolbar>
+    </subHeader>
+
+    <Table id="leaveTable" items="{/LeaveRequests}" growing="true" growingThreshold="20"
+      mode="SingleSelectMaster" selectionChange="onSelectionChange" noDataText="{i18n>msgNoData}"
+      updateFinished="onUpdateFinished">
+      <columns>
+        <Column><Text text="{i18n>colLeaveType}"/></Column>
+        <Column><Text text="{i18n>colStartDate}"/></Column>
+        <Column><Text text="{i18n>colEndDate}"/></Column>
+        <Column><Text text="{i18n>colDays}"/></Column>
+        <Column><Text text="{i18n>colReason}"/></Column>
+        <Column><Text text="{i18n>colStatus}"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem type="Navigation" press="onItemPress">
+          <cells>
+            <Text text="{path:'leaveType_code', formatter:'.formatter.leaveTypeText'}"/>
+            <Text text="{path:'startDate', type:'sap.ui.model.odata.type.Date'}"/>
+            <Text text="{path:'endDate', type:'sap.ui.model.odata.type.Date'}"/>
+            <Text text="{path:'days', type:'sap.ui.model.odata.type.Decimal', formatOptions:{maxFractionDigits:1}}"/>
+            <Text text="{reason}" maxLines="2"/>
+            <ObjectStatus text="{path:'status', formatter:'.formatter.statusText'}" state="{path:'status', formatter:'.formatter.statusState'}"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </Page>
+</mvc:View>

@@ -1,0 +1,58 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.AuditLogs"
+  height="100%">
+  <Page title="{i18n>titleAuditLogs}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://export" text="{i18n>btnExport}" press="onExport" type="Transparent"/>
+    </headerContent>
+    <subHeader>
+      <Toolbar>
+        <Label text="Action"/>
+        <Select id="actionFilter" selectedKey="ALL" change="onFilterChange">
+          <core:Item key="ALL" text="All"/>
+          <core:Item key="LEAVE_SUBMITTED" text="Leave Submitted"/>
+          <core:Item key="LEAVE_APPROVED" text="Leave Approved"/>
+          <core:Item key="LEAVE_REJECTED" text="Leave Rejected"/>
+          <core:Item key="LEAVE_BALANCE_ADJUSTED" text="Balance Adjusted"/>
+          <core:Item key="OVERTIME_SUBMITTED" text="Overtime Submitted"/>
+          <core:Item key="OVERTIME_APPROVED" text="Overtime Approved"/>
+          <core:Item key="SWAP_APPROVED" text="Swap Approved"/>
+          <core:Item key="COVERAGE_OVERRIDE" text="Coverage Override"/>
+        </Select>
+        <ToolbarSpacer/>
+        <SearchField id="search" width="250px" liveChange="onSearch"/>
+      </Toolbar>
+    </subHeader>
+
+    <Table id="auditTable" items="{/AuditLogs}" growing="true" growingThreshold="50" noDataText="{i18n>msgNoData}">
+      <columns>
+        <Column><Text text="Timestamp"/></Column>
+        <Column><Text text="User"/></Column>
+        <Column><Text text="Action"/></Column>
+        <Column><Text text="Entity"/></Column>
+        <Column><Text text="Entity ID"/></Column>
+        <Column><Text text="From"/></Column>
+        <Column><Text text="To"/></Column>
+        <Column><Text text="Reason"/></Column>
+      </columns>
+      <items>
+        <ColumnListItem>
+          <cells>
+            <Text text="{path:'timestamp', type:'sap.ui.model.odata.type.DateTime'}"/>
+            <Text text="{userId}"/>
+            <Text text="{action}"/>
+            <Text text="{entityType}"/>
+            <Text text="{entityId}"/>
+            <Text text="{prevValue}" maxLines="2"/>
+            <Text text="{newValue}" maxLines="2"/>
+            <Text text="{reason}" maxLines="2"/>
+          </cells>
+        </ColumnListItem>
+      </items>
+    </Table>
+  </Page>
+</mvc:View>

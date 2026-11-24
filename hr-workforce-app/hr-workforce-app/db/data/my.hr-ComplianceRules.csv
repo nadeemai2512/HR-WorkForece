@@ -1,0 +1,3 @@
+ID;jurisdiction;dailyMaxHours;weeklyRegularHours;weeklyOTAllowance;weeklyMaxHours;quarterlyOTLimit;quarterlyWarnAt;minRestHours;effectiveFrom;effectiveTo
+00000000-0000-0000-0000-0000000000r1;IN-DEFAULT;12;48;12;60;50;40;11;2026-01-01;
+00000000-0000-0000-0000-0000000000r2;US-CA;12;40;8;48;40;32;10;2026-01-01;

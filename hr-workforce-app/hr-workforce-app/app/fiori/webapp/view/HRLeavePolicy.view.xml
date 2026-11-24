@@ -1,0 +1,106 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true"
+  controllerName="hr.fiori.controller.HRLeavePolicy"
+  height="100%">
+  <Page title="{i18n>titleHRLeavePolicy}" showNavButton="true" navButtonPress="onNavBack">
+    <headerContent>
+      <Button icon="sap-icon://add" text="Add Leave Type" type="Emphasized" press="onAddLeaveType"/>
+      <Button icon="sap-icon://add" text="Add Policy" press="onAddPolicy"/>
+    </headerContent>
+
+    <Panel headerText="Leave Types" class="sapUiResponsiveMargin">
+      <Table id="leaveTypesTable" items="{/LeaveTypes}" mode="None" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="Code"/></Column>
+          <Column><Text text="Name"/></Column>
+          <Column><Text text="Negative Balance"/></Column>
+          <Column><Text text="Exempt Blackout"/></Column>
+          <Column><Text text="Med Cert (days)"/></Column>
+          <Column><Text text="Active"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{code}"/>
+              <Text text="{name}"/>
+              <Text text="{path:'allowNegativeBalance', formatter:'.formatter.boolText'}"/>
+              <Text text="{path:'exemptFromBlackout', formatter:'.formatter.boolText'}"/>
+              <Text text="{medicalCertThresholdDays}"/>
+              <ObjectStatus text="{path:'active', formatter:'.formatter.boolText'}" state="{= ${active} ? 'Success' : 'Error' }"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+
+    <Panel headerText="Leave Policies (Entitlements)" class="sapUiResponsiveMargin">
+      <Table id="policiesTable" items="{/LeavePolicies}" mode="None" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="{i18n>colLeaveType}"/></Column>
+          <Column><Text text="Annual Entitlement"/></Column>
+          <Column><Text text="Long Leave Threshold"/></Column>
+          <Column><Text text="Min Advance Days"/></Column>
+          <Column><Text text="Effective From"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{leaveType_code}"/>
+              <Text text="{annualEntitlement}"/>
+              <Text text="{longLeaveThresholdDays}"/>
+              <Text text="{minAdvanceDaysForLongLeave}"/>
+              <Text text="{path:'effectiveFrom', type:'sap.ui.model.odata.type.Date'}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+
+    <Panel headerText="Holidays" class="sapUiResponsiveMargin">
+      <Table id="holidaysTable" items="{/CompanyHolidays}" mode="None" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="Date"/></Column>
+          <Column><Text text="Name"/></Column>
+          <Column><Text text="Jurisdiction"/></Column>
+          <Column><Text text="Half Day"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{path:'holidayDate', type:'sap.ui.model.odata.type.Date'}"/>
+              <Text text="{name}"/>
+              <Text text="{jurisdiction}"/>
+              <Text text="{path:'halfDay', formatter:'.formatter.boolText'}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+
+    <Panel headerText="Blackout Periods" class="sapUiResponsiveMargin">
+      <Table id="blackoutsTable" items="{/BlackoutPeriods}" mode="None" noDataText="{i18n>msgNoData}">
+        <columns>
+          <Column><Text text="Start"/></Column>
+          <Column><Text text="End"/></Column>
+          <Column><Text text="Reason"/></Column>
+          <Column><Text text="All Leave Types"/></Column>
+          <Column><Text text="Specific Types"/></Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Text text="{path:'startDate', type:'sap.ui.model.odata.type.Date'}"/>
+              <Text text="{path:'endDate', type:'sap.ui.model.odata.type.Date'}"/>
+              <Text text="{reason}"/>
+              <Text text="{path:'appliesToAllLeaveTypes', formatter:'.formatter.boolText'}"/>
+              <Text text="{leaveTypes}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </Panel>
+  </Page>
+</mvc:View>
