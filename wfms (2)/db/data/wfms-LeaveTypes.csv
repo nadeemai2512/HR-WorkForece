@@ -1,5 +1,0 @@
-ID,code,name,description,code,defaultEntitlementDays,allowNegativeBalance,requireCertificateAfterDays,exemptFromBlackout,exemptFromAdvanceNotice,eligibleForCarryForward,maxCarryForwardDays,active,createdAt,createdBy,modifiedAt,modifiedBy
-e9c0add9-dc38-5fa1-9184-3d2747706cb7,EL,Earned Leave,Annual paid vacation,EL,20.0,false,0,false,false,true,10.0,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-906331e7-480e-5f2a-af8e-02d4f954e362,SL,Sick Leave,Medical leave,SL,12.0,false,2,true,true,false,0.0,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-44c09620-fba5-568d-85b1-7b8fe19f6cf9,CL,Casual Leave,Short personal leave,CL,8.0,false,0,false,false,false,0.0,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-5c1cc78d-9ffd-58ad-a4ef-2f9dfd8b51c9,CO,Compensatory Off,Earned from overtime,CO,0.0,true,0,true,true,true,12.0,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system

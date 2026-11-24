@@ -1,2 +1,0 @@
-ID,country,region,weekdayMultiplier,weekendMultiplier,publicHolidayMultiplier,compOffConversionHours,effectiveFrom,effectiveTo,active,createdAt,createdBy,modifiedAt,modifiedBy
-54009346-0667-531e-88eb-08bf17daabbf,,IND,1.50,2.00,2.50,4.0,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
