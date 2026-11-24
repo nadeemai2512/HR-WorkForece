@@ -1,5 +1,0 @@
-ID,code,name,description,country,region,headEmployee_ID,minCoveragePct,active,createdAt,createdBy,modifiedAt,modifiedBy
-876d04ad-e621-5c0e-a8a5-cbc13d5e7a96,ENG,Engineering,Software delivery and platform engineering,IND,BLR,8cf633e4-793a-5cb3-b679-d99e92b0d795,70,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-f6bebe22-86dc-533f-b18a-44e3a24ff73f,SALES,Sales & Marketing,"Field sales, inside sales and demand generation",IND,MUM,d91aa492-5a65-5ba4-8448-9893730ea431,70,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-b921639c-0d47-5291-bcb0-9432ac90f271,HRD,Human Resources,People operations and HR business partners,IND,BLR,d1389658-deb1-5444-94b4-7bf95810367a,60,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-f2a3f61e-addb-561e-9450-81cb814dfc27,OPS,Operations,"Logistics, facilities and shift operations",IND,DEL,30c7f8bf-9aac-5837-bdb8-39d0d0539e68,80,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system

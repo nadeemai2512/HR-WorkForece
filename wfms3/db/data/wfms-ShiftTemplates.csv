@@ -1,4 +1,0 @@
-ID,code,name,description,startTime,endTime,breakMinutes,color,active,createdAt,createdBy,modifiedAt,modifiedBy
-ff3b4022-e16a-59fe-b9f3-cc4fc4d6d287,MOR,Morning Shift,Early operations support,06:00,14:30,30,#3a8dd1,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-5a5ff68f-fcf9-5ed9-985d-799b1eb59576,GEN,General Shift,Standard office hours,09:00,18:00,60,#52a350,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-d0dff2ca-4650-5da3-8118-3c1b2e834207,NGT,Night Shift,Overnight operations,22:00,06:30,30,#8e63b3,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system

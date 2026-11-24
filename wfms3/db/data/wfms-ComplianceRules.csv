@@ -1,4 +1,0 @@
-ID,country,region,employeeCategory,dailyMaxHours,weeklyRegularHours,weeklyMaxOvertime,weeklyMaxTotalHours,quarterlyOvertimeLimit,minRestHours,warningThresholdPct,effectiveFrom,effectiveTo,active,createdAt,createdBy,modifiedAt,modifiedBy
-6191763b-5bea-5758-95cd-53b49e80d378,IND,,Permanent,12,48,12,60,50,11,80,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-0907ad63-6f48-5181-9965-b8909574dd19,IND,,Contract,9,48,8,56,40,11,80,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-2fc6bfce-537f-52a0-80d0-808975f50512,IND,,Intern,8,40,4,44,20,12,80,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system

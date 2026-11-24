@@ -1,3 +1,0 @@
-ID,balance_ID,delta,reason,adjustedBy,adjustedAt,previousEntitlement,newEntitlement
-a92e2e9c-97b1-5768-8982-bed50dd51663,dceef2f7-4fde-5743-ba24-fe9a1fa9f8bb,5.0,Carry-forward from prior year,carol@wfms.com,2026-01-01T00:00:00Z,20.0,25.0
-8c186efd-2267-5122-a4de-b0922981cd6a,5cb7d84d-f7f4-5422-a6fe-c9b5131fe333,2.0,Annual correction,carol@wfms.com,2026-01-01T00:00:00Z,8.0,10.0

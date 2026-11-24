@@ -1,5 +1,0 @@
-ID,leaveType_ID,country,region,minAdvanceNoticeDays,advanceNoticeThresholdDays,requireCertificateAfterDays,effectiveFrom,effectiveTo,active,createdAt,createdBy,modifiedAt,modifiedBy
-75a7242a-6fe9-5a4c-b749-2468fd74c9e8,e9c0add9-dc38-5fa1-9184-3d2747706cb7,IND,,7,3,0,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-b8cdf1bd-11ce-5842-b499-a78a3131283f,906331e7-480e-5f2a-af8e-02d4f954e362,IND,,0,0,2,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-1148e1c4-b02f-5b55-87dd-5021d66654ec,44c09620-fba5-568d-85b1-7b8fe19f6cf9,IND,,2,1,0,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
-3bb1bddc-095e-5914-bb8c-1054fbd0ccee,5c1cc78d-9ffd-58ad-a4ef-2f9dfd8b51c9,IND,,0,0,0,2026-01-01,2026-12-31,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
