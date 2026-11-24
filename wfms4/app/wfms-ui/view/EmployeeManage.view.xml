@@ -1,0 +1,51 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core"
+    controllerName="wfms.ui.controller.EmployeeManage" displayBlock="true">
+    <Page title="Employee Management" showNavButton="true" navButtonPress="onNavBack">
+        <customHeader>
+            <Bar>
+                <contentLeft><Button icon="sap-icon://nav-back" press="onNavBack" type="Transparent" /></contentLeft>
+                <contentMiddle><Title text="Employee Management" /></contentMiddle>
+                <contentRight><Button text="Create Employee" icon="sap-icon://add-employee" type="Emphasized" press="onCreate" /></contentRight>
+            </Bar>
+        </customHeader>
+        <VBox class="sapUiSmallMargin">
+            <Toolbar>
+                <SearchField id="searchField" width="50%" placeholder="Search by name or number" liveChange="onSearch" />
+                <Select id="deptFilter" items="{/Departments}" change="onDeptChange">
+                    <items><core:Item key="{ID}" text="{name}" /></items>
+                </Select>
+                <ToolbarSpacer />
+                <Button icon="sap-icon://refresh" press="onRefresh" type="Transparent" />
+            </Toolbar>
+            <Table id="empTable" items="{path:'/Employees', parameters:{$expand:'department,manager'}}"
+                growing="true" growingThreshold="20" mode="SingleSelectMaster" noDataText="{i18n>msgNoData}" itemPress="onItemPress">
+                <columns>
+                    <Column><Text text="Emp. Number" /></Column>
+                    <Column><Text text="Name" /></Column>
+                    <Column><Text text="{i18n>colDepartment}" /></Column>
+                    <Column><Text text="Manager" /></Column>
+                    <Column><Text text="Category" /></Column>
+                    <Column><Text text="Status" /></Column>
+                    <Column><Text text="Hire Date" /></Column>
+                    <Column><Text text="Country" /></Column>
+                    <Column><Text text="Actions" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation">
+                        <cells>
+                            <Text text="{employeeNumber}" />
+                            <Text text="{fullName}" />
+                            <Text text="{department/name}" />
+                            <Text text="{manager/fullName}" />
+                            <Text text="{employeeCategory}" />
+                            <ObjectStatus text="{status}" state="{= ${status} === 'Active' ? 'Success' : 'None' }" />
+                            <Text text="{path:'hireDate', type:'sap.ui.model.odata.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                            <Text text="{country}" />
+                            <Button icon="sap-icon://delete" type="Transparent" press="onDelete" tooltip="Delete" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+    </Page>
+</mvc:View>

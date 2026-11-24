@@ -1,0 +1,53 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"
+    xmlns:f="sap.f"
+    controllerName="wfms.ui.controller.App"
+    displayBlock="true"
+    height="100%">
+    <tnt:ToolPage id="toolPage">
+        <tnt:header>
+            <tnt:ToolHeader>
+                <Button icon="sap-icon://menu" press="onSideNavButtonPress" type="Transparent">
+                    <layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+                </Button>
+                <Text text="{i18n>appTitle}" wrapping="false" class="sapUiTinyMarginBegin wfmsAppShellTitle" />
+                <ToolbarSpacer />
+                <Text text="{ui>currentEmployeeNumber}" visible="{= ${ui>currentEmployeeNumber} !== '' }" class="sapUiTinyMarginEnd" />
+                <Text text="·" visible="{= ${ui>currentRole} !== '' }" class="sapUiTinyMarginEnd" />
+                <Text text="{ui>currentRole}" class="sapUiTinyMarginEnd" />
+                <Button icon="sap-icon://person-placeholder" type="Transparent" press="onUserProfilePress" />
+            </tnt:ToolHeader>
+        </tnt:header>
+        <tnt:mainContents>
+            <!-- sap.m.App is a NavContainer whose 'pages' aggregation is the
+                 routing target declared in manifest.json (controlId="app",
+                 controlAggregation="pages"). FlexibleColumnLayout has no
+                 'pages' aggregation, so using it here broke every route. -->
+            <App id="app" />
+        </tnt:mainContents>
+        <tnt:sideContent>
+            <tnt:SideNavigation
+                id="sideNavigation"
+                selectedKey="employeeDashboard"
+                itemSelect="onItemSelect">
+                <tnt:NavigationList>
+                    <tnt:NavigationListItem text="{i18n>navEmployee}" icon="sap-icon://employee" key="employeeDashboard" />
+                    <tnt:NavigationListItem text="{i18n>navManager}" icon="sap-icon://group" key="managerDashboard" />
+                    <tnt:NavigationListItem text="{i18n>navHR}" icon="sap-icon://settings" key="hrDashboard" />
+                    <tnt:NavigationListItem text="Leave" icon="sap-icon://away" key="leaveList" />
+                    <tnt:NavigationListItem text="Overtime" icon="sap-icon://time-entry-request" key="overtimeList" />
+                    <tnt:NavigationListItem text="Shifts" icon="sap-icon://calendar" key="shiftSchedule" />
+                    <tnt:NavigationListItem text="Approvals" icon="sap-icon://inbox" key="approvalInbox" />
+                </tnt:NavigationList>
+                <tnt:fixedItem>
+                    <tnt:NavigationList>
+                        <tnt:NavigationListItem text="Reports" icon="sap-icon://excel-attachment" key="reports" />
+                        <tnt:NavigationListItem text="Audit Log" icon="sap-icon://history" key="auditLog" />
+                    </tnt:NavigationList>
+                </tnt:fixedItem>
+            </tnt:SideNavigation>
+        </tnt:sideContent>
+    </tnt:ToolPage>
+</mvc:View>

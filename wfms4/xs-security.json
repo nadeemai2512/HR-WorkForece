@@ -1,0 +1,42 @@
+{
+  "xsappname": "wfms",
+  "tenant-mode": "dedicated",
+  "description": "WFMS - Employee Leave, Shift Scheduling & Overtime Management security config",
+  "scopes": [
+    { "name": "$XSAPPNAME.Employee",  "description": "Employee self-service scope" },
+    { "name": "$XSAPPNAME.Manager",   "description": "Line manager approval scope" },
+    { "name": "$XSAPPNAME.HRAdmin",   "description": "HR administrator scope" }
+  ],
+  "role-templates": [
+    {
+      "name": "Employee",
+      "description": "Employee - access own leave, shifts, overtime",
+      "scope-references": [ "$XSAPPNAME.Employee", "$XSAPPNAME.OWNEmployeeData" ]
+    },
+    {
+      "name": "Manager",
+      "description": "Line Manager - approve team leave / overtime / swaps",
+      "scope-references": [ "$XSAPPNAME.Manager", "$XSAPPNAME.Employee" ]
+    },
+    {
+      "name": "HRAdmin",
+      "description": "HR Administrator - configure policies, employees, exports",
+      "scope-references": [ "$XSAPPNAME.HRAdmin", "$XSAPPNAME.Manager", "$XSAPPNAME.Employee" ]
+    }
+  ],
+  "role-collections": [
+    { "name": "Employee_Role",  "description": "Employee role collection",  "role-template-references": [ "Employee" ] },
+    { "name": "Manager_Role",   "description": "Manager role collection",   "role-template-references": [ "Manager" ] },
+    { "name": "HR_Admin_Role",  "description": "HR Administrator role collection", "role-template-references": [ "HRAdmin" ] }
+  ],
+  "attributes": [
+    { "name": "country", "description": "Employee country for region-aware compliance", "valueType": "string" },
+    { "name": "region",  "description": "Employee region for region-aware compliance",  "valueType": "string" }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "https://*.{default-domain}/login/callback"
+    ],
+    "token-validity": 3600
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout",
+    "logoutPage": "/logout.html"
+  },
+  "routes": [
+    {
+      "source": "^/odata/v4/(.*)$",
+      "target": "/odata/v4/$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa",
+      "scope": "$XSAPPNAME.Employee"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "localDir": "resources",
+      "authenticationType": "xsuaa",
+      "scope": "$XSAPPNAME.Employee"
+    }
+  ]
+}

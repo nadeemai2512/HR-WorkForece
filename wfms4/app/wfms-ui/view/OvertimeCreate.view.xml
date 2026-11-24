@@ -1,0 +1,46 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+    controllerName="wfms.ui.controller.OvertimeCreate" displayBlock="true">
+    <Page title="{i18n>otCreate}" showNavButton="true" navButtonPress="onNavBack">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="5" columnsL="1">
+                <f:content>
+                    <Title text="Overtime Entry" level="H3" />
+                    <Label text="{i18n>leaveEmployee}" /><Text text="{ui>currentEmployeeNumber}" />
+                    <Label text="{i18n>otWorkDate}" required="true" />
+                    <DatePicker id="workDate" valueFormat="yyyy-MM-dd" displayFormat="dd-MMM-yyyy" change="onPreview" />
+                    <Label text="Regular Shift Start" /><TimePicker id="regStart" valueFormat="HH:mm" displayFormat="HH:mm" />
+                    <Label text="Regular Shift End" /><TimePicker id="regEnd" valueFormat="HH:mm" displayFormat="HH:mm" />
+                    <Label text="{i18n>otStart}" required="true" /><TimePicker id="otStart" valueFormat="HH:mm" displayFormat="HH:mm" change="onPreview" />
+                    <Label text="{i18n>otEnd}" required="true" /><TimePicker id="otEnd" valueFormat="HH:mm" displayFormat="HH:mm" change="onPreview" />
+                    <Label text="Comp-Off Election" />
+                    <Select id="compOffElection" selectedKey="Payout">
+                        <items>
+                            <core:Item key="Payout" text="Pay Out" />
+                            <core:Item key="CompOff" text="Convert to Comp-Off" />
+                            <core:Item key="Split" text="Split (Pay + Comp-Off)" />
+                        </items>
+                    </Select>
+                    <Label text="Reason" /><TextArea id="reason" rows="3" width="100%" />
+                </f:content>
+            </f:SimpleForm>
+
+            <Title text="Calculation Preview" level="H3" class="wfmsSectionTitle" />
+            <f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanL="4" columnsL="2">
+                <f:content>
+                    <Label text="{i18n>otType}" /><Text id="prevType" text="—" />
+                    <Label text="{i18n>otMinutes}" /><Text id="prevMinutes" text="—" />
+                    <Label text="{i18n>otMultiplier}" /><Text id="prevMultiplier" text="—" />
+                    <Label text="Base Hourly Rate" /><Text id="prevRate" text="—" />
+                    <Label text="{i18n>colAmount}" /><Text id="prevAmount" text="—" />
+                    <Label text="{i18n>otCompOff}" /><Text id="prevCompOff" text="—" />
+                </f:content>
+            </f:SimpleForm>
+
+            <Toolbar class="sapUiMediumMarginTop">
+                <Button text="Save as Draft" press="onSaveDraft" type="Transparent" />
+                <Button text="Save &amp; Submit" press="onSubmit" type="Emphasized" />
+                <Button text="Cancel" press="onNavBack" type="Transparent" />
+            </Toolbar>
+        </VBox>
+    </Page>
+</mvc:View>
