@@ -1,7 +1,0 @@
-employeeNo;firstName;lastName;fullName;email;department_code;manager_ID;jobTitle;roleCategory;jurisdiction;baseHourlyRate;weeklyRegularHours;hireDate;status
-E1001;Alice;Sharma;Alice Sharma;alice.sharma@company.com;D_HR;;Chief HR Officer;HR_ADMIN;IN-DEFAULT;800;48;2020-01-15;ACTIVE
-E1002;Bob;Verma;Bob Verma;bob.verma@company.com;D_OPS;E1001;Operations Manager;MANAGER;IN-DEFAULT;600;48;2021-03-01;ACTIVE
-E1003;Carol;Singh;Carol Singh;carol.singh@company.com;D_OPS;E1002;Field Engineer;EMPLOYEE;IN-DEFAULT;350;48;2022-06-15;ACTIVE
-E1004;David;Kumar;David Kumar;david.kumar@company.com;D_OPS;E1002;Field Engineer;EMPLOYEE;IN-DEFAULT;320;48;2022-09-01;ACTIVE
-E1005;Eve;Gupta;Eve Gupta;eve.gupta@company.com;D_OPS;E1002;Field Engineer;EMPLOYEE;IN-DEFAULT;300;48;2023-01-10;ACTIVE
-E1006;Frank;Reddy;Frank Reddy;frank.reddy@company.com;D_IT;E1001;IT Manager;MANAGER;IN-DEFAULT;700;48;2021-05-20;ACTIVE

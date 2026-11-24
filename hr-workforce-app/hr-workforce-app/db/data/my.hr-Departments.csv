@@ -1,4 +1,0 @@
-code;name;description;manager_ID;minCoveragePercent;costCenter;active
-D_HR;Human Resources;HR and People Operations;E1001;70;CC-HR;true
-D_OPS;Operations;Field and Service Operations;E1002;70;CC-OPS;true
-D_IT;Information Technology;IT and Infrastructure;E1006;70;CC-IT;true
