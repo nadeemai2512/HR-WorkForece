@@ -1,0 +1,95 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    controllerName="wfms.ui.controller.LeaveDetail"
+    displayBlock="true">
+    <Page title="Leave Request Detail" showNavButton="true" navButtonPress="onNavBack">
+        <VBox class="sapUiSmallMargin">
+            <ObjectHeader title="{leaveType/name}"
+                number="{days}" numberUnit="day(s)"
+                intro="{employee/fullName}"
+                status="{path:'status', formatter:'.statusValueState'}">
+                <attributes>
+                    <ObjectAttribute text="Start: {path:'startDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                    <ObjectAttribute text="End: {path:'endDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                    <ObjectAttribute text="Department: {employee/department/name}" />
+                    <ObjectAttribute text="Blackout Exempt: {path:'blackoutExempt', formatter:'.formatters.yesNo'}" />
+                </attributes>
+                <firstStatus>
+                    <ObjectStatus text="{status}" state="{path:'status', formatter:'.statusValueState'}" icon="{path:'status', formatter:'.statusIcon'}" />
+                </firstStatus>
+            </ObjectHeader>
+
+            <f:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanL="4" columnsL="2" class="sapUiSmallMargin">
+                <f:content>
+                    <Title text="Request Details" level="H3" />
+                    <Label text="Employee Number" /><Text text="{employee/employeeNumber}" />
+                    <Label text="Leave Type" /><Text text="{leaveType/name} ({leaveType/code})" />
+                    <Label text="Half Day" /><Text text="{path:'isHalfDay', formatter:'.formatters.yesNo'}" />
+                    <Label text="Reason" /><Text text="{reason}" />
+                    <Label text="Requestor Comments" /><Text text="{requestorComments}" />
+                    <Label text="Created At" /><Text text="{path:'createdAt', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                    <Label text="Created By" /><Text text="{createdBy}" />
+                    <Title text="Approval" level="H3" />
+                    <Label text="Approver" /><Text text="{approver/fullName}" />
+                    <Label text="Approved At" /><Text text="{path:'approvedAt', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                    <Label text="Approver Comments" /><Text text="{approverComments}" />
+                    <Title text="Coverage Validation" level="H3" />
+                    <Label text="Coverage Override Applied" /><Text text="{path:'coverageOverrideApplied', formatter:'.formatters.yesNo'}" />
+                    <Label text="Override Reason" /><Text text="{coverageOverrideReason}" />
+                </f:content>
+            </f:SimpleForm>
+
+            <Title text="Attachments" level="H3" class="wfmsSectionTitle" />
+            <Table items="{attachments}" noDataText="No attachments" growing="true" growingThreshold="5">
+                <columns>
+                    <Column><Text text="File Name" /></Column>
+                    <Column><Text text="Uploaded By" /></Column>
+                    <Column><Text text="Uploaded At" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{fileName}" />
+                            <Text text="{uploadedBy}" />
+                            <Text text="{path:'uploadedAt', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <Title text="Approval History" level="H3" class="wfmsSectionTitle" />
+            <Table items="{approvalHistory}" noDataText="No approval history">
+                <columns>
+                    <Column><Text text="Action" /></Column>
+                    <Column><Text text="Approver" /></Column>
+                    <Column><Text text="Decision" /></Column>
+                    <Column><Text text="Comments" /></Column>
+                    <Column><Text text="Decided At" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{action}" />
+                            <Text text="{approver}" />
+                            <Text text="{decision}" />
+                            <Text text="{comments}" />
+                            <Text text="{path:'decidedAt', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy HH:mm'}}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <Toolbar class="sapUiMediumMarginTop">
+                <Button text="{i18n>leaveSubmit}" type="Emphasized" press="onSubmit" enabled="{= ${status} === 'Draft' || ${status} === 'SentBack' }" />
+                <Button text="{i18n>leaveApprove}" type="Accept" press="onApprove" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="{i18n>leaveReject}" type="Reject" press="onReject" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="{i18n>leaveSendBack}" press="onSendBack" enabled="{= ${status} === 'PendingManager' }" />
+                <Button text="{i18n>leaveCancel}" press="onCancel" enabled="{= ${status} === 'Draft' || ${status} === 'PendingManager' || ${status} === 'SentBack' }" />
+            </Toolbar>
+        </VBox>
+    </Page>
+</mvc:View>

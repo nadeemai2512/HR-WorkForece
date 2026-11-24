@@ -1,0 +1,14 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+    controllerName="wfms.ui.controller.NotFound" displayBlock="true">
+    <Page title="{i18n>titleNotFound}" showNavButton="true" navButtonPress="onNavBack">
+        <MessagePage
+            title="{i18n>titleNotFound}"
+            text="The page you navigated to does not exist."
+            icon="sap-icon://document"
+            description="Check the URL or use the side navigation to go back to a valid page.">
+            <customAction>
+                <Button text="Go to Employee Dashboard" press="onNavBack" type="Emphasized" />
+            </customAction>
+        </MessagePage>
+    </Page>
+</mvc:View>

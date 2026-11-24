@@ -1,0 +1,63 @@
+{
+  "name": "wfms",
+  "version": "1.0.0",
+  "description": "Employee Leave, Shift Scheduling & Overtime Management System - SAP CAP + SAPUI5",
+  "repository": "https://github.com/example/wfms",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "deploy": "cds deploy",
+    "build": "cds build --production",
+    "test": "cds bind --exec mocha test/",
+    "lint": "cds compile srv/ --dry"
+  },
+  "dependencies": {
+    "@sap/cds": "^10",
+    "@cap-js/sqlite": "^3",
+    "@sap/xssec": "^4",
+    "@sap/cds-common-content": "^2",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^10",
+    "@cap-js/hana": "^3",
+    "@sap/ux-specification": "^1",
+    "mocha": "^10",
+    "chai": "^4",
+    "chai-as-promised": "^7",
+    "sqlite3": "^5"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db.sqlite"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "alice@wfms.com": { "password": "initial", "roles": ["Employee"], "attr": { "employeeNumber": "E1001" } },
+          "bob@wfms.com": { "password": "initial", "roles": ["Employee", "Manager"], "attr": { "employeeNumber": "E1002" } },
+          "carol@wfms.com": { "password": "initial", "roles": ["HRAdmin"], "attr": { "employeeNumber": "E1003" } }
+        }
+      },
+      "[production]": {
+        "db": {
+          "kind": "hana"
+        },
+        "auth": {
+          "kind": "xsuaa"
+        }
+      }
+    },
+    "log": {
+      "service": true
+    }
+  }
+}

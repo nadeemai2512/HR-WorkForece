@@ -1,0 +1,213 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:ui="sap.ui.table"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    controllerName="wfms.ui.controller.EmployeeDashboard"
+    xmlns:cards="sap.f.cards"
+    displayBlock="true">
+    <Page id="employeeDashboardPage"
+          title="{i18n>empDashboardTitle}"
+          showHeader="false">
+        <VBox class="sapUiSmallMargin">
+            <!-- Header banner -->
+            <VBox class="wfmsDashboardHeader">
+                <Text text="{i18n>empDashboardTitle}" class="wfmsDashboardTitle" />
+                <Text text="{i18n>empDashboardSubtitle}" class="wfmsDashboardSubtitle" />
+            </VBox>
+
+            <!-- KPI tiles row 1: leave balances (all clickable -> leave list filtered) -->
+            <Title text="Leave Balances" level="H3" class="wfmsSectionTitle" />
+            <HBox class="wfmsKpiGrid" wrap="Wrap" width="100%">
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiAvailableEL}" press="onKpiPressLeaveBalance">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'availableEL'}" icon="sap-icon://vacation" valueColor="Good" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiAvailableSL}" press="onKpiPressLeaveBalance">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'availableSL'}" icon="sap-icon://doctor" valueColor="Critical" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiAvailableCL}" press="onKpiPressLeaveBalance">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'availableCL'}" icon="sap-icon://calendar" valueColor="Neutral" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiAvailableCO}" press="onKpiPressLeaveBalance">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'availableCO'}" icon="sap-icon://time-entry-request" valueColor="Neutral" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+            </HBox>
+
+            <!-- KPI tiles row 2: leave requests & overtime (clickable -> filtered lists) -->
+            <Title text="Requests" level="H3" class="wfmsSectionTitle" />
+            <HBox class="wfmsKpiGrid" wrap="Wrap" width="100%">
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiPendingLeave}" press="onKpiPressPendingLeave">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'pendingLeave'}" icon="sap-icon://pending" valueColor="Critical" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiApprovedLeave}" press="onKpiPressApprovedLeave">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'approvedLeave'}" icon="sap-icon://accept" valueColor="Good" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiPendingOvertime}" press="onKpiPressPendingOvertime">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'pendingOvertime'}" icon="sap-icon://pending" valueColor="Critical" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiApprovedOvertime}" press="onKpiPressApprovedOvertime">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'approvedOvertimeMinutes'}" icon="sap-icon://overtime" valueColor="Good" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+            </HBox>
+
+            <!-- KPI tiles row 3: weekly hours -->
+            <Title text="Working Hours" level="H3" class="wfmsSectionTitle" />
+            <HBox class="wfmsKpiGrid" wrap="Wrap" width="100%">
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiWeeklyHours}" press="onKpiPressSchedule">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'weeklyMinutes'}" icon="sap-icon://time" valueColor="Neutral" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+                <GenericTile class="wfmsKpiTile" header="{i18n>kpiRemainingHours}" press="onKpiPressSchedule">
+    <tileContent>
+        <TileContent>
+            <content>
+                <NumericContent value="{path:'remainingWeeklyMinutes'}" icon="sap-icon://trend-down" valueColor="Good" />
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+            </HBox>
+
+            <!-- Quick actions -->
+            <Title text="{i18n>secQuickActions}" level="H3" class="wfmsSectionTitle" />
+            <HBox class="wfmsQuickActionGrid" wrap="Wrap" width="100%">
+                <Button text="{i18n>actApplyLeave}" icon="sap-icon://away" press="onApplyLeave" type="Emphasized" />
+                <Button text="{i18n>actSubmitOvertime}" icon="sap-icon://overtime" press="onSubmitOvertime" type="Default" />
+                <Button text="{i18n>actRequestSwap}" icon="sap-icon://synchronize" press="onRequestSwap" type="Default" />
+                <Button text="{i18n>actViewSchedule}" icon="sap-icon://calendar" press="onViewSchedule" type="Default" />
+                <Button text="{i18n>actViewHistory}" icon="sap-icon://history" press="onViewHistory" type="Default" />
+            </HBox>
+
+            <!-- Weekly hours chart -->
+            <Title text="{i18n>secWeeklyChart}" level="H3" class="wfmsSectionTitle" />
+            <viz:VizFrame id="weeklyHoursChart" uiConfig="{applicationSet:'no'}" height="280px" width="100%"
+                vizType="bar" vizProperties="{ title: { visible: true, text: 'Weekly Working Hours (minutes)' } }">
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{chart>/rows}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Day" value="{day}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="Regular" value="{regular}" />
+                            <viz.data:MeasureDefinition name="Overtime" value="{overtime}" />
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                    <!-- <viz:FeedItem uid="valueAxis" type="Measure" values="Regular,Overtime" />
+                    <viz:FeedItem uid="categoryAxis" type="Dimension" values="Day" /> -->
+                </viz:feeds>
+            </viz:VizFrame>
+
+            <!-- Two-column: upcoming shifts + recent leave -->
+            <layout:VerticalLayout width="100%">
+                <Title text="{i18n>secMyShifts}" level="H3" class="wfmsSectionTitle" />
+                <Table id="upcomingShiftsTable"
+                    items="{path:'/ShiftAssignments', parameters:{$expand:'shiftTemplate'}, sorter:{path:'assignmentDate', descending:false}}"
+                    growing="true" growingThreshold="5" width="100%"
+                    noDataText="{i18n>msgNoData}">
+                    <columns>
+                        <Column><Text text="{i18n>shiftDate}" /></Column>
+                        <Column><Text text="{i18n>shiftTemplate}" /></Column>
+                        <Column><Text text="{i18n>shiftStart}" /></Column>
+                        <Column><Text text="{i18n>shiftEnd}" /></Column>
+                        <Column><Text text="{i18n>leaveStatus}" /></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{path:'assignmentDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'EEE dd-MMM-yyyy'}}" />
+                                <Text text="{shiftTemplate/name}" />
+                                <Text text="{startTime}" />
+                                <Text text="{endTime}" />
+                                <ObjectStatus text="{status}" state="{path:'status', formatter:'.statusValueState'}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </layout:VerticalLayout>
+
+            <Title text="{i18n>secRecentLeave}" level="H3" class="wfmsSectionTitle" />
+            <Table id="recentLeaveTable"
+                items="{path:'/LeaveRequests', parameters:{$expand:'leaveType'}, sorter:{path:'createdAt', descending:true}}"
+                growing="true" growingThreshold="5" width="100%"
+                noDataText="{i18n>msgNoData}">
+                <columns>
+                    <Column><Text text="{i18n>leaveType}" /></Column>
+                    <Column><Text text="{i18n>leaveStart}" /></Column>
+                    <Column><Text text="{i18n>leaveEnd}" /></Column>
+                    <Column><Text text="{i18n>leaveDays}" /></Column>
+                    <Column><Text text="{i18n>leaveStatus}" /></Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press="onLeaveItemPress">
+                        <cells>
+                            <Text text="{leaveType/name}" />
+                            <Text text="{path:'startDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                            <Text text="{path:'endDate', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd-MMM-yyyy'}}" />
+                            <Text text="{days}" />
+                            <ObjectStatus text="{status}" state="{path:'status', formatter:'.statusValueState'}" icon="{path:'status', formatter:'.statusIcon'}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+    </Page>
+</mvc:View>

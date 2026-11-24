@@ -1,0 +1,2 @@
+ID,name,startDate,endDate,country,region,appliesToLeaveTypes,reason,active,createdAt,createdBy,modifiedAt,modifiedBy
+f50fc29d-a76f-539f-8ea5-7a037f72386d,Year-end freeze,2026-12-20,2026-12-31,IND,,"EL,CL",Year-end close and product launch freeze,true,2026-01-01T00:00:00Z,system,2026-01-01T00:00:00Z,system
